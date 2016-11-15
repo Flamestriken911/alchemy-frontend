@@ -1,7 +1,7 @@
 "use strict";
 class Effect {
     constructor(_effectName, _discovered) {
-        this.effectName = _effectName;
+        this.name = _effectName;
         this.discovered = _discovered;
     }
 }
