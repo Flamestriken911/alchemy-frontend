@@ -9,7 +9,6 @@ class DataHelper {
         this.GetMatches = (relativePath, fileName, ingredientName, mixture, callback) => {
             this.ReadIngredients(relativePath, fileName, (err, list) => {
                 if (err) {
-                    console.log('err in GetMatches');
                     callback(err, null, null);
                 }
                 else {
@@ -22,23 +21,31 @@ class DataHelper {
             var chosenIngredient = list.ingredientList.find(x => x.name.toLowerCase() === ingredientName.toLowerCase());
             //If the mixture is null or undefined, create a new one with the chosen ingredient to start
             if (mixture == null || mixture === undefined) {
-                console.log(`Created new mixture; provided mixture was ${mixture}`);
-                this.mixture = new Mixture(chosenIngredient);
+                mixture = new Mixture(chosenIngredient);
             }
             else {
-                console.log(`Provided mixture not undefined or null. Adding new ingredient.`);
-                this.mixture.AddIngredient(chosenIngredient);
+                mixture.AddIngredient(chosenIngredient);
             }
             if (chosenIngredient === undefined) {
-                console.log('err in CheckMatchesInList');
                 err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
                 callback(err, null, null);
             }
             else {
-                list.UpdateWithMatches(chosenIngredient);
-                callback(null, list, this.mixture);
+                list.UpdateWithMatches(mixture);
+                callback(null, list, mixture);
             }
         };
+        this.GetDiscoveries = (relativePath, fileName, ingredientName1, callback) => {
+            /*        this.ReadIngredients(relativePath, fileName, function(list:IngredientList){
+                        console.log(`Finding discoveries for: ${list.ingredientList.find(x => x.name === ingredientName1).name}`);
+                        list.UpdateWithDiscoveries(list.ingredientList.find(x => x.name === ingredientName1));
+                        for (var i=0; i<list.ingredientList.length; i++){
+                            if(list.ingredientList[i].discoveries > 0){
+                                console.log(`${list.ingredientList[i].name}: ${list.ingredientList[i].discoveries} effect discoveries`);
+                            }
+                        }
+                    })
+            */ };
         this.ReadIngredients = (relativePath, fileName, callback) => {
             var fileReadStream = fs.createReadStream(relativePath + fileName);
             var data = '';
@@ -57,7 +64,7 @@ class DataHelper {
                 callback(null, listObject);
             });
         };
-        this.ParseIngredientString = function (ingredientString) {
+        this.ParseIngredientString = (ingredientString) => {
             var ingredientString_Split = ingredientString.split(',');
             return new Ingredient(ingredientString_Split[0].replace(/[^a-zA-Z' ]/g, ''), [
                 new Effect(ingredientString_Split[1].replace(/[^a-zA-Z' ]/g, ''), false),
@@ -66,17 +73,6 @@ class DataHelper {
                 new Effect(ingredientString_Split[4].replace(/[^a-zA-Z' ]/g, ''), false)
             ]);
         };
-    }
-    GetDiscoveries(relativePath, fileName, ingredientName1, callback) {
-        this.ReadIngredients(relativePath, fileName, function (list) {
-            console.log(`Finding discoveries for: ${list.ingredientList.find(x => x.name === ingredientName1).name}`);
-            list.UpdateWithDiscoveries(list.ingredientList.find(x => x.name === ingredientName1));
-            for (var i = 0; i < list.ingredientList.length; i++) {
-                if (list.ingredientList[i].discoveries > 0) {
-                    console.log(`${list.ingredientList[i].name}: ${list.ingredientList[i].discoveries} effect discoveries`);
-                }
-            }
-        });
     }
 }
 module.exports = DataHelper;

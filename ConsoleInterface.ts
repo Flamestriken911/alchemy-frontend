@@ -28,7 +28,8 @@ class ConsoleInterface{
             this.readline.close();
             return err;
         } else{
-            this.PrintMatches(list);
+            this.PrintMatches(list, mixture);
+            list.Reset();
             this.readline.question('\nPick your second ingredient: ', (answer) => {
                 this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
             }
@@ -41,7 +42,8 @@ class ConsoleInterface{
             this.readline.close();
             return err;
         } else{
-            this.PrintMatches(list);
+            this.PrintMatches(list, mixture);
+            list.Reset();
             this.readline.question('\nPick your third and final ingredient: ', (answer) => {
                 this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                 this.readline.close();
@@ -49,10 +51,10 @@ class ConsoleInterface{
         )}
     }
 
-    private PrintMatches = (list: IngredientList) => {
+    private PrintMatches = (list: IngredientList, mixture: Mixture) => {
         console.log(`\n`);
         list.ingredientList.forEach((ingredient) => {
-            if(ingredient.addedEffects > 0 && !ingredient.isInMixture){
+            if(ingredient.addedEffects > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)){
                 console.log(`${ingredient.name}: ${ingredient.addedEffects} matches`);
             }
         })

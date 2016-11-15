@@ -5,7 +5,6 @@ class Ingredient {
     effects: Effect[];
     addedEffects: number; //Number of effect matches added by this ingredient to the current mixture
     discoveries: number; //Number of effect discoveries added by this ingredient to the current mixture
-    isInMixture: boolean; //Whether this is one of the chosen ingredients for this mixture so far
     
     constructor(_name: string, _effects: Effect[]){
         this.name = _name;
@@ -14,11 +13,11 @@ class Ingredient {
     }
 
     //Gets number of newly-discovered effects (up to 2 per effect since the effect could be new on both ingredients)
-    UpdateWithDiscoveredEffects(effectsToLookFor: Effect[], recordMatches: boolean){
+    UpdateWithDiscoveredEffects(effectsToLookFor: Effect[]){
         this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineDiscoveries)
     }
 
-    UpdateWithMatchedEffects(effectsToLookFor: Effect[], recordMatches: boolean){
+    UpdateWithMatchedEffects(effectsToLookFor: Effect[]){
         this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineAddedEffects)
     }
 

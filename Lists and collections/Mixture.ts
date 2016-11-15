@@ -22,18 +22,14 @@ class Mixture{
         var indexInActualEffects: number;
         ingredient.effects.forEach((effect) =>{
             indexInPotentialEffects = this.potentialEffects.findIndex(e => e.name === effect.name);
-            if(indexInPotentialEffects !== undefined && indexInPotentialEffects >= 0){
+            if(indexInPotentialEffects >= 0){
                 //Move the effect from potential to actual effects arrays
                 this.actualEffects.push(...this.potentialEffects.splice(indexInPotentialEffects, 1));
-                console.log(`Effect added to final mixture: ${effect.name}`);
                 console.log(`Current actual effects: ${this.actualEffects.map((e)=>e.name).join(', ')}`);
             } else {
             indexInActualEffects = this.actualEffects.findIndex(e => e.name === effect.name);
-                if(indexInActualEffects !== undefined && indexInActualEffects >= 0){
-                    console.log(`Effect ${effect.name} has already been added to final mixture`);
-                } else{
+                if(indexInActualEffects < 0){
                     this.potentialEffects.push(effect);
-                    console.log(`Effect ${effect.name} added as a potential effect`);
                     console.log(`Current potential effects: ${this.potentialEffects.map((e)=>e.name).join(', ')}`);
                 }
             }

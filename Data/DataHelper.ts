@@ -5,7 +5,6 @@ import fs = require('fs');
 import Mixture = require('../Lists and collections/Mixture');
 
 class DataHelper {
-    mixture : Mixture;
     constructor(){}
 
     GetMatches = (relativePath: string, fileName: string, ingredientName: string, mixture: Mixture, 
@@ -26,23 +25,22 @@ class DataHelper {
 
         //If the mixture is null or undefined, create a new one with the chosen ingredient to start
         if(mixture == null || mixture === undefined){
-            this.mixture = new Mixture(chosenIngredient);
+            mixture = new Mixture(chosenIngredient);
         } else{
-            this.mixture.AddIngredient(chosenIngredient);
+            mixture.AddIngredient(chosenIngredient);
         }
 
         if(chosenIngredient === undefined){
             err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
             callback(err, null, null);
         } else{
-            list.UpdateWithMatches(chosenIngredient);
-            callback(null, list, this.mixture);
+            list.UpdateWithMatches(mixture);
+            callback(null, list, mixture);
         }
     }
 
-
-    GetDiscoveries(relativePath: string, fileName: string, ingredientName1: string, callback){
-        this.ReadIngredients(relativePath, fileName, function(list:IngredientList){
+    GetDiscoveries = (relativePath: string, fileName: string, ingredientName1: string, callback) => {
+/*        this.ReadIngredients(relativePath, fileName, function(list:IngredientList){
             console.log(`Finding discoveries for: ${list.ingredientList.find(x => x.name === ingredientName1).name}`);
             list.UpdateWithDiscoveries(list.ingredientList.find(x => x.name === ingredientName1));
             for (var i=0; i<list.ingredientList.length; i++){
@@ -51,9 +49,9 @@ class DataHelper {
                 }
             }
         })
-    }
+*/    }
 
-    ReadIngredients = (relativePath: string, fileName: string, callback: (err: any, list: IngredientList)=>void) =>{
+    ReadIngredients = (relativePath: string, fileName: string, callback: (err: any, list: IngredientList)=>void) => {
         var fileReadStream = fs.createReadStream(relativePath + fileName);
         var data = '';
         fileReadStream.on('data', (chunk) =>{
@@ -72,7 +70,7 @@ class DataHelper {
         })
     }
     
-    ParseIngredientString = function(ingredientString: string){
+    ParseIngredientString = (ingredientString: string) => {
         var ingredientString_Split = ingredientString.split(',');
         return new Ingredient(
             ingredientString_Split[0].replace(/[^a-zA-Z' ]/g, ''), 

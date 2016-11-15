@@ -28,10 +28,10 @@ class Ingredient {
         this.addedEffects = this.discoveries = 0;
     }
     //Gets number of newly-discovered effects (up to 2 per effect since the effect could be new on both ingredients)
-    UpdateWithDiscoveredEffects(effectsToLookFor, recordMatches) {
+    UpdateWithDiscoveredEffects(effectsToLookFor) {
         this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineDiscoveries);
     }
-    UpdateWithMatchedEffects(effectsToLookFor, recordMatches) {
+    UpdateWithMatchedEffects(effectsToLookFor) {
         this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineAddedEffects);
     }
 }
