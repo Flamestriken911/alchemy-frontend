@@ -22,7 +22,7 @@ class IngredientList {
             this.ingredientList.forEach((ingredient) => {
                 //If it's not already in the mixture, check for effects that would be added if it were
                 if (!mixture.ingredients.some((i) => ingredient.name === i.name)) {
-                    ingredient.UpdateWithDiscoveredEffects(mixture.potentialEffects);
+                    ingredient.UpdateWithDiscoveredEffects([...mixture.potentialEffects, ...mixture.actualEffects]);
                 }
             });
         };

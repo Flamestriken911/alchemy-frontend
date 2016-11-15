@@ -16,16 +16,23 @@ class Mixture {
                 if (indexInPotentialEffects >= 0) {
                     //Move the effect from potential to actual effects arrays
                     this.actualEffects.push(...this.potentialEffects.splice(indexInPotentialEffects, 1));
-                    console.log(`Current actual effects: ${this.actualEffects.map((e) => e.name).join(', ')}`);
+                    // be sure to update the effect as 'will be discovered'
+                    this.actualEffects[this.actualEffects.length - 1].willBeDiscovered = true;
                 }
                 else {
                     indexInActualEffects = this.actualEffects.findIndex(e => e.name === effect.name);
                     if (indexInActualEffects < 0) {
                         this.potentialEffects.push(effect);
-                        console.log(`Current potential effects: ${this.potentialEffects.map((e) => e.name).join(', ')}`);
+                    }
+                    else {
+                        // be sure to update the effect as 'will be discovered'
+                        this.actualEffects[this.actualEffects.length - 1].willBeDiscovered = true;
                     }
                 }
             });
+            console.log(`Current potential effects: ${this.potentialEffects.map((e) => e.name).join(', ')}`);
+            console.log(`Current actual effects: ${this.actualEffects.map((e) => e.name).join(', ')}`);
+            return this;
         };
         this.ingredients[0] = ingredient;
         this.potentialEffects = [...ingredient.effects];

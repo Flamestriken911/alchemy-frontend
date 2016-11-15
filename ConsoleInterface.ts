@@ -20,18 +20,21 @@ class ConsoleInterface{
     
 
     FirstQuestion = () => this.readline.question('Pick your first ingredient: ', (answer) => {
-        this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
+        // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
+        this.dataHelper.GetDiscoveries(this.filePath, this.fileName, answer, null, this.SecondQuestion);
     })
 
     SecondQuestion = (err: any, list: IngredientList, mixture: Mixture) => {
         if(err){
             this.readline.close();
-            return err;
+            console.log(err);
         } else{
-            this.PrintMatches(list, mixture);
+            this.PrintDiscoveries(list, mixture);
+            // this.PrintMatches(list, mixture);
             list.Reset();
             this.readline.question('\nPick your second ingredient: ', (answer) => {
-                this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
+                // this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
+                this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, this.FinalQuestion);
             }
     )}
 }
@@ -40,12 +43,14 @@ class ConsoleInterface{
         if(err){
             console.log(`err in ThirdQuestion: ${err}`);
             this.readline.close();
-            return err;
+            console.log(err);
         } else{
-            this.PrintMatches(list, mixture);
+            this.PrintDiscoveries(list, mixture);
+            // this.PrintMatches(list, mixture);
             list.Reset();
             this.readline.question('\nPick your third and final ingredient: ', (answer) => {
-                this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
+                // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
+                this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                 this.readline.close();
             }
         )}
@@ -55,7 +60,15 @@ class ConsoleInterface{
         console.log(`\n`);
         list.ingredientList.forEach((ingredient) => {
             if(ingredient.addedEffects > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)){
-                console.log(`${ingredient.name}: ${ingredient.addedEffects} matches`);
+                console.log(`${ingredient.name}: ${ingredient.addedEffects} potential matches`);
+            }
+        })
+    }
+    private PrintDiscoveries = (list: IngredientList, mixture: Mixture) => {
+        console.log(`\n`);
+        list.ingredientList.forEach((ingredient) => {
+            if(ingredient.discoveries > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)){
+                console.log(`${ingredient.name}: ${ingredient.discoveries} potential discoveries`);
             }
         })
     }

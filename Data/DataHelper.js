@@ -16,41 +16,59 @@ class DataHelper {
                 }
             });
         };
+        this.GetDiscoveries = (relativePath, fileName, ingredientName, mixture, callback) => {
+            this.ReadIngredients(relativePath, fileName, (err, list) => {
+                if (err) {
+                    callback(err, null, null);
+                }
+                else {
+                    this.CheckDiscoveriesInList(list, ingredientName, mixture, callback);
+                }
+            });
+        };
         this.CheckMatchesInList = (list, ingredientName, mixture, callback) => {
             var err = null;
-            var chosenIngredient = list.ingredientList.find(x => x.name.toLowerCase() === ingredientName.toLowerCase());
-            //If the mixture is null or undefined, create a new one with the chosen ingredient to start
-            if (mixture == null || mixture === undefined) {
-                mixture = new Mixture(chosenIngredient);
-            }
-            else {
-                mixture.AddIngredient(chosenIngredient);
-            }
-            if (chosenIngredient === undefined) {
+            var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
+            if (ingredient === undefined) {
                 err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
                 callback(err, null, null);
             }
             else {
+                mixture = this.CreateOrAddToMixture(mixture, ingredient);
                 list.UpdateWithMatches(mixture);
                 callback(null, list, mixture);
             }
         };
-        this.GetDiscoveries = (relativePath, fileName, ingredientName1, callback) => {
-            /*        this.ReadIngredients(relativePath, fileName, function(list:IngredientList){
-                        console.log(`Finding discoveries for: ${list.ingredientList.find(x => x.name === ingredientName1).name}`);
-                        list.UpdateWithDiscoveries(list.ingredientList.find(x => x.name === ingredientName1));
-                        for (var i=0; i<list.ingredientList.length; i++){
-                            if(list.ingredientList[i].discoveries > 0){
-                                console.log(`${list.ingredientList[i].name}: ${list.ingredientList[i].discoveries} effect discoveries`);
-                            }
-                        }
-                    })
-            */ };
+        this.CheckDiscoveriesInList = (list, ingredientName, mixture, callback) => {
+            var err = null;
+            var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
+            if (ingredient === undefined) {
+                err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
+                callback(err, null, null);
+            }
+            else {
+                mixture = this.CreateOrAddToMixture(mixture, ingredient);
+                list.UpdateWithDiscoveries(mixture);
+                callback(null, list, mixture);
+            }
+        };
+        this.CreateOrAddToMixture = (mixture, ingredient) => {
+            //If the mixture is null or undefined, create a new one with the chosen ingredient to start
+            if (mixture == null || mixture === undefined) {
+                return new Mixture(ingredient);
+            }
+            else {
+                return mixture.AddIngredient(ingredient);
+            }
+        };
         this.ReadIngredients = (relativePath, fileName, callback) => {
             var fileReadStream = fs.createReadStream(relativePath + fileName);
             var data = '';
             fileReadStream.on('data', (chunk) => {
                 data += chunk;
+            });
+            fileReadStream.on('error', () => {
+                callback(`An error occured while attempting to read from ${relativePath + fileName}`, null);
             });
             fileReadStream.on('end', () => {
                 console.log('SUCCESS: Data read from file');

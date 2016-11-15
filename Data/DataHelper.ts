@@ -8,8 +8,8 @@ class DataHelper {
     constructor(){}
 
     GetMatches = (relativePath: string, fileName: string, ingredientName: string, mixture: Mixture, 
-    callback: (err: any, list: IngredientList, mixture: Mixture)=>void) =>{
-        this.ReadIngredients(relativePath, fileName, (err, list:IngredientList) =>{
+    callback: (err: any, list: IngredientList, mixture: Mixture)=>void) => {
+        this.ReadIngredients(relativePath, fileName, (err, list:IngredientList) => {
             if(err){
                 callback(err, null, null);
             } else{
@@ -18,38 +18,55 @@ class DataHelper {
         })
     }
 
+    GetDiscoveries = (relativePath: string, fileName: string, ingredientName: string, mixture: Mixture,
+    callback: (err: any, list: IngredientList, mixture: Mixture)=>void) => {
+        this.ReadIngredients(relativePath, fileName, (err, list:IngredientList) =>{
+            if(err){
+                callback(err, null, null);
+            } else{
+                this.CheckDiscoveriesInList(list, ingredientName, mixture, callback);
+            }
+        })
+    }
+
     CheckMatchesInList = (list: IngredientList, ingredientName: string, mixture: Mixture, 
-    callback: (err: any, list: IngredientList, mixture: Mixture)=>void): void =>{
+    callback: (err: any, list: IngredientList, mixture: Mixture)=>void): void => {
         var err = null;
-        var chosenIngredient = list.ingredientList.find(x => x.name.toLowerCase() === ingredientName.toLowerCase());
+        var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
 
-        //If the mixture is null or undefined, create a new one with the chosen ingredient to start
-        if(mixture == null || mixture === undefined){
-            mixture = new Mixture(chosenIngredient);
-        } else{
-            mixture.AddIngredient(chosenIngredient);
-        }
-
-        if(chosenIngredient === undefined){
+        if(ingredient === undefined){
             err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
             callback(err, null, null);
         } else{
+            mixture = this.CreateOrAddToMixture(mixture, ingredient);
             list.UpdateWithMatches(mixture);
             callback(null, list, mixture);
         }
     }
 
-    GetDiscoveries = (relativePath: string, fileName: string, ingredientName1: string, callback) => {
-/*        this.ReadIngredients(relativePath, fileName, function(list:IngredientList){
-            console.log(`Finding discoveries for: ${list.ingredientList.find(x => x.name === ingredientName1).name}`);
-            list.UpdateWithDiscoveries(list.ingredientList.find(x => x.name === ingredientName1));
-            for (var i=0; i<list.ingredientList.length; i++){
-                if(list.ingredientList[i].discoveries > 0){
-                    console.log(`${list.ingredientList[i].name}: ${list.ingredientList[i].discoveries} effect discoveries`);
-                }
-            }
-        })
-*/    }
+    CheckDiscoveriesInList = (list: IngredientList, ingredientName: string, mixture: Mixture, 
+    callback: (err: any, list: IngredientList, mixture: Mixture)=>void): void => {
+        var err = null;
+        var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
+        
+        if(ingredient === undefined){
+            err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
+            callback(err, null, null);
+        } else{
+            mixture = this.CreateOrAddToMixture(mixture, ingredient);
+            list.UpdateWithDiscoveries(mixture);
+            callback(null, list, mixture);
+        }
+    }
+
+    private CreateOrAddToMixture = (mixture: Mixture, ingredient: Ingredient): Mixture => {
+        //If the mixture is null or undefined, create a new one with the chosen ingredient to start
+        if(mixture == null || mixture === undefined){
+                return new Mixture(ingredient);
+        } else{
+            return mixture.AddIngredient(ingredient);
+        }
+    }
 
     ReadIngredients = (relativePath: string, fileName: string, callback: (err: any, list: IngredientList)=>void) => {
         var fileReadStream = fs.createReadStream(relativePath + fileName);
@@ -57,6 +74,9 @@ class DataHelper {
         fileReadStream.on('data', (chunk) =>{
             data += chunk;
         });
+        fileReadStream.on('error', () => {
+            callback(`An error occured while attempting to read from ${relativePath + fileName}`, null);
+        })
         fileReadStream.on('end', () => {
             console.log('SUCCESS: Data read from file');
             //NOTE: The line splitting creates a final, empty line
