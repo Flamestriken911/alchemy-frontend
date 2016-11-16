@@ -1,13 +1,16 @@
 "use strict";
 const ReadLine = require('readline');
 const DataHelper = require('./Data/DataHelper');
+const DataHandler = require('./Data/DataHandler');
 class ConsoleInterface {
     constructor() {
         this.filePath = './Data/';
         this.fileName = 'ingredient info.csv';
         this.FirstQuestion = () => this.readline.question('Pick your first ingredient: ', (answer) => {
             // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
-            this.dataHelper.GetDiscoveries(this.filePath, this.fileName, answer, null, this.SecondQuestion);
+            this.dataHandler.GetDefaultIngredientList((err, list) => {
+                this.dataHelper.CheckDiscoveriesInList(list, answer, null, this.SecondQuestion);
+            });
         });
         this.SecondQuestion = (err, list, mixture) => {
             if (err) {
@@ -62,6 +65,7 @@ class ConsoleInterface {
             output: process.stdout
         });
         this.dataHelper = new DataHelper();
+        this.dataHandler = new DataHandler();
     }
 }
 module.exports = ConsoleInterface;

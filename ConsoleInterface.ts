@@ -1,11 +1,13 @@
 import ReadLine = require('readline');
 import DataHelper = require('./Data/DataHelper');
+import DataHandler = require('./Data/DataHandler');
 import Ingredient = require('./Components/Ingredient');
 import IngredientList = require('./Lists and collections/IngredientList');
 import Mixture = require('./Lists and collections/Mixture');
 
 class ConsoleInterface{
     dataHelper: DataHelper;
+    dataHandler: DataHandler;
     filePath = './Data/';
     fileName = 'ingredient info.csv';
     readline : ReadLine.ReadLine;
@@ -16,12 +18,15 @@ class ConsoleInterface{
             output: process.stdout
         })
         this.dataHelper = new DataHelper();
+        this.dataHandler = new DataHandler();
     }
     
 
     FirstQuestion = () => this.readline.question('Pick your first ingredient: ', (answer) => {
         // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
-        this.dataHelper.GetDiscoveries(this.filePath, this.fileName, answer, null, this.SecondQuestion);
+        this.dataHandler.GetDefaultIngredientList((err, list) => {
+            this.dataHelper.CheckDiscoveriesInList(list,answer, null, this.SecondQuestion);
+        });
     })
 
     SecondQuestion = (err: any, list: IngredientList, mixture: Mixture) => {
