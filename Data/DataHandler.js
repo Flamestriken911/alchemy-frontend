@@ -43,7 +43,6 @@ class DataHandler {
                 new Effect(ingredientString_Split[2].split(':')[0], ingredientString_Split[1].split(':')[1] === 'true')
             ]);
         };
-        console.log(this.filePath);
     }
     get filePath() {
         return this.relativePath + this.fileName;

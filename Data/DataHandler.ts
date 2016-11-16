@@ -11,7 +11,6 @@ class DataHandler {
 
     // constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.csv') {
     constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.txt') {
-        console.log(this.filePath);
     }
 
     GetDefaultIngredientList = (callback: (err: any, list: IngredientList)=>void) => {
