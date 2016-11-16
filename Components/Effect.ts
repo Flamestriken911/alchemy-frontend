@@ -9,6 +9,9 @@ class Effect{
         this.name = _effectName;
         this.discovered = _discovered;
     }
+    ToStorageString = () => {
+        return this.name + ':' + this.discovered;
+    }
 }
 
 export = Effect;

@@ -5,21 +5,24 @@ import fs = require('fs');
 import Mixture = require('../Lists and collections/Mixture');
 
 class DataHandler {
-    filePath: string;
+    get filePath(): string {
+        return this.relativePath + this.fileName;
+    }
 
-    constructor(relativePath: string = './Data/', fileName: string = 'ingredient info.csv') {
-        this.filePath = relativePath + fileName;
+    // constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.csv') {
+    constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.txt') {
+        console.log(this.filePath);
     }
 
     GetDefaultIngredientList = (callback: (err: any, list: IngredientList)=>void) => {
         var fileReadStream = fs.createReadStream(this.filePath);
         var data = '';
-        fileReadStream.on('data', (chunk) =>{
-            data += chunk;
-        });
         fileReadStream.on('error', () => {
             callback(`An error occured while attempting to read from ${this.filePath}`, null);
         })
+        fileReadStream.on('data', (chunk) =>{
+            data += chunk;
+        });
         fileReadStream.on('end', () => {
             console.log('SUCCESS: Data read from file');
             //NOTE: The line splitting creates a final, empty line
@@ -28,20 +31,26 @@ class DataHandler {
             for(var i=0; i<lines.length-1; i++){
                 listObject.ingredientList.push(this.ParseIngredientString(lines[i]));
             }
-            console.log('SUCCESS: Data written to object')
             callback(null, listObject);
         })
     }
-    
-    ParseIngredientString = (ingredientString: string) => {
-        var ingredientString_Split = ingredientString.split(',');
+
+    WriteIngredientList = (list: IngredientList, callback) => {
+        var fileWriteSteam = fs.createWriteStream(this.filePath);
+        fileWriteSteam.write(list.ToStorageString());
+        fileWriteSteam.close();
+        callback('wrote to file');
+    }
+
+    ParseIngredientString = (ingredientString: string): Ingredient => {
+        var ingredientString_Split = ingredientString.replace(/[^a-zA-Z',: ]/g, '').split(',');
         return new Ingredient(
-            ingredientString_Split[0].replace(/[^a-zA-Z' ]/g, ''), 
+            ingredientString_Split[0], 
             [
-                new Effect(ingredientString_Split[1].replace(/[^a-zA-Z' ]/g, ''),false),
-                new Effect(ingredientString_Split[2].replace(/[^a-zA-Z' ]/g, ''),false),
-                new Effect(ingredientString_Split[3].replace(/[^a-zA-Z' ]/g, ''),false),
-                new Effect(ingredientString_Split[4].replace(/[^a-zA-Z' ]/g, ''),false)
+                new Effect(ingredientString_Split[1].split(':')[0],ingredientString_Split[1].split(':')[1]==='true'),
+                new Effect(ingredientString_Split[3].split(':')[0],ingredientString_Split[1].split(':')[1]==='true'),
+                new Effect(ingredientString_Split[4].split(':')[0],ingredientString_Split[1].split(':')[1]==='true'),
+                new Effect(ingredientString_Split[2].split(':')[0],ingredientString_Split[1].split(':')[1]==='true')
             ]);
     };
 }

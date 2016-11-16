@@ -23,6 +23,13 @@ class Ingredient {
                 this.addedEffects += ((effect1.willHaveEffect || effect2.willHaveEffect) ? 0 : 1);
             }
         };
+        this.ToStorageString = () => {
+            var storageString = this.name;
+            this.effects.forEach((effect) => {
+                storageString += ',' + effect.ToStorageString();
+            });
+            return storageString;
+        };
         this.name = _name;
         this.effects = _effects;
         this.addedEffects = this.discoveries = 0;

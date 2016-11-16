@@ -39,7 +39,12 @@ class ConsoleInterface {
                 list.Reset();
                 this.readline.question('\nPick your third and final ingredient: ', (answer) => {
                     // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
-                    this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => console.log('Success!'));
+                    this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
+                        if (!err) {
+                            var writestream = new DataHandler('./Data/', 'test.txt');
+                            writestream.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
+                        }
+                    });
                     this.readline.close();
                 });
             }

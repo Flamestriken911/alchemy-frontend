@@ -26,6 +26,13 @@ class IngredientList {
                 }
             });
         };
+        this.ToStorageString = () => {
+            var csv = '';
+            this.ingredientList.forEach((ingredient, index) => {
+                csv += ingredient.ToStorageString() + '\n';
+            });
+            return csv;
+        };
     }
 }
 module.exports = IngredientList;
