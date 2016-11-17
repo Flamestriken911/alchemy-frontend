@@ -18,7 +18,6 @@ class ConsoleInterface {
             this.FirstQuestion(this.user);
         });
         this.FirstQuestion = (user) => this.readline.question('Pick your first ingredient: ', (answer) => {
-            // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
             this.dataHandler.GetUserListOrDefault(user, (err, list) => {
                 if (err) {
                     this.readline.close();
@@ -35,12 +34,10 @@ class ConsoleInterface {
                 console.log(err);
             }
             else {
-                // this.PrintDiscoveries(list, mixture);
                 this.PrintMatches(list, mixture);
                 list.Reset();
                 this.readline.question('\nPick your second ingredient: ', (answer) => {
                     this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
-                    // this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, this.FinalQuestion);
                 });
             }
         };
@@ -69,18 +66,45 @@ class ConsoleInterface {
         this.PrintMatches = (list, mixture) => {
             console.log(`\n`);
             list.ingredientList.forEach((ingredient) => {
-                if (ingredient.addedEffects > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)) {
-                    console.log(`${ingredient.name}:${(ingredient.name.length < 15) ? (ingredient.name.length < 7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.addedEffects} effects:\t${ingredient.effects.filter((eff) => eff.currentAddedEffectsValue > 0).map((eff) => eff.name).join(',\t')}`);
+                if (!mixture.ingredients.some((i) => i.name === ingredient.name)) {
+                    var ingredientString = this.GetIngredientMatchesString(ingredient);
+                    if (ingredientString) {
+                        console.log(ingredientString);
+                    }
                 }
             });
         };
-        this.PrintDiscoveries = (list, mixture) => {
-            console.log(`\n`);
-            list.ingredientList.forEach((ingredient) => {
-                if (ingredient.discoveries > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)) {
-                    console.log(`${ingredient.name}:${(ingredient.name.length < 15) ? (ingredient.name.length < 7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.discoveries} discoveries:\t${ingredient.effects.filter((eff) => eff.currentDiscoveryValue > 0).map((eff) => eff.name).join(',\t')}`);
+        this.GetIngredientMatchesString = (ingredient) => {
+            var matchesString = `${ingredient.name}:`;
+            if (ingredient.addedEffects + ingredient.discoveries > 0) {
+                ingredient.effects.forEach((effect, index) => {
+                    var currentEffectString = this.GetEffectMatchString(effect);
+                    if (currentEffectString) {
+                        // console.log(`${ingredient.name}:${(ingredient.name.length<15) ? (ingredient.name.length<7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.addedEffects} effects:\t${
+                        matchesString += `${(matchesString.length === (ingredient.name + ':').length) ? '\t' : ', '} ${currentEffectString}`;
+                    }
+                });
+            }
+            else
+                return null;
+            return matchesString;
+        };
+        this.GetEffectMatchString = (effect) => {
+            var matchesString = effect.name;
+            if (effect.currentAddedEffectsValue > 0) {
+                if (effect.currentDiscoveryValue > 0) {
+                    matchesString += '(effect & discovery)';
                 }
-            });
+                else {
+                    matchesString += '(effect only)';
+                }
+            }
+            else if (effect.currentDiscoveryValue > 0) {
+                matchesString += '(discovery only)';
+            }
+            else
+                matchesString = null;
+            return matchesString;
         };
         this.readline = ReadLine.createInterface({
             input: process.stdin,

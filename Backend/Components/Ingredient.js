@@ -3,11 +3,11 @@ class Ingredient {
     constructor(_name, _effects) {
         //Helper method that uses checker method to compare effects in an ingredient to effects in some a list of effects
         this.UpdateIngredientWithMatches = (effectsToLookFor, matchCounterFunction) => {
-            for (var i = 0; i < this.effects.length; i++) {
-                for (var j = 0; j < effectsToLookFor.length; j++) {
-                    matchCounterFunction(this.effects[i], effectsToLookFor[j]);
-                }
-            }
+            this.effects.forEach((effect) => {
+                effectsToLookFor.forEach((effectToLookFor) => {
+                    matchCounterFunction(effect, effectToLookFor);
+                });
+            });
         };
         this.DetermineDiscoveries = (effect1, effect2) => {
             if (effect1.name === effect2.name) {
@@ -33,14 +33,8 @@ class Ingredient {
         };
         this.name = _name;
         this.effects = _effects;
-        this.addedEffects = this.discoveries = 0;
-    }
-    //Gets number of newly-discovered effects (up to 2 per effect since the effect could be new on both ingredients)
-    UpdateWithDiscoveredEffects(effectsToLookFor) {
-        this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineDiscoveries);
-    }
-    UpdateWithMatchedEffects(effectsToLookFor) {
-        this.UpdateIngredientWithMatches(effectsToLookFor, this.DetermineAddedEffects);
+        this.addedEffects = 0;
+        this.discoveries = 0;
     }
 }
 module.exports = Ingredient;

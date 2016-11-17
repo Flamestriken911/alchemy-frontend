@@ -22,21 +22,6 @@ class DataHelper {
         }
     }
 
-    CheckDiscoveriesInList = (list: IngredientList, ingredientName: string, mixture: Mixture, 
-    callback: (err: any, list: IngredientList, mixture: Mixture)=>void): void => {
-        var err = null;
-        var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
-        
-        if(ingredient === undefined){
-            err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
-            callback(err, null, null);
-        } else{
-            mixture = this.CreateOrAddToMixture(mixture, ingredient);
-            list.UpdateWithDiscoveries(mixture);
-            callback(null, list, mixture);
-        }
-    }
-
     MakeMixture = (list: IngredientList, mixture: Mixture) => {
         mixture.MakeMixture();
         //Replace each ingredient in the list with its counterpart in the mixture
