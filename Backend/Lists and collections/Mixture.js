@@ -6,18 +6,18 @@ class Mixture {
         this.potentialEffects = []; //Effects only in a single ingredient in the mixture
         this.actualEffects = []; //Effects in at least two ingredients in the mixture
         this.AddIngredient = (ingredient) => {
-            this.ingredients.push(ingredient);
-            console.log(`Ingredient added: ${ingredient.name}`);
-            console.log(`Current ingredients: ${this.ingredients.map((i) => i.name).join(', ')}`);
             var indexInPotentialEffects;
             var indexInActualEffects;
             ingredient.effects.forEach((effect) => {
+                effect.willHaveEffect = false;
+                effect.willBeDiscovered = false;
                 indexInPotentialEffects = this.potentialEffects.findIndex(e => e.name === effect.name);
                 if (indexInPotentialEffects >= 0) {
+                    // be sure to update the effect as 'will be discovered'
+                    effect.willBeDiscovered = true;
+                    this.potentialEffects[indexInPotentialEffects].willBeDiscovered = true;
                     //Move the effect from potential to actual effects arrays
                     this.actualEffects.push(...this.potentialEffects.splice(indexInPotentialEffects, 1));
-                    // be sure to update the effect as 'will be discovered'
-                    this.actualEffects[this.actualEffects.length - 1].willBeDiscovered = true;
                 }
                 else {
                     indexInActualEffects = this.actualEffects.findIndex(e => e.name === effect.name);
@@ -26,13 +26,24 @@ class Mixture {
                     }
                     else {
                         // be sure to update the effect as 'will be discovered'
-                        this.actualEffects[this.actualEffects.length - 1].willBeDiscovered = true;
+                        effect.willBeDiscovered = true;
                     }
                 }
             });
+            this.ingredients.push(ingredient);
+            console.log(`Ingredient added: ${ingredient.name}`);
+            console.log(`Current ingredients: ${this.ingredients.map((i) => i.name).join(', ')}`);
             console.log(`Current potential effects: ${this.potentialEffects.map((e) => e.name).join(', ')}`);
             console.log(`Current actual effects: ${this.actualEffects.map((e) => e.name).join(', ')}`);
             return this;
+        };
+        //Currently just finalizes all effect discoveries
+        this.MakeMixture = () => {
+            this.ingredients.forEach((ingredient) => {
+                ingredient.effects.forEach((effect) => {
+                    effect.discovered = effect.willBeDiscovered;
+                });
+            });
         };
         this.ingredients[0] = ingredient;
         this.potentialEffects = [...ingredient.effects];

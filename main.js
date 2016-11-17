@@ -1,5 +1,5 @@
 "use strict";
-const DataHelper = require('./Data/DataHelper');
+const DataHelper = require('./Backend/Data/DataHelper');
 const ConsoleInterface = require('./ConsoleInterface');
 var dataHelper = new DataHelper();
 var consoleInterface = new ConsoleInterface();

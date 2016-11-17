@@ -1,7 +1,7 @@
 "use strict";
 const ReadLine = require('readline');
-const DataHelper = require('./Data/DataHelper');
-const DataHandler = require('./Data/DataHandler');
+const DataHelper = require('./Backend/Data/DataHelper');
+const DataHandler = require('./Backend/Data/DataHandler');
 class ConsoleInterface {
     constructor() {
         this.filePath = './Data/';
@@ -10,10 +10,12 @@ class ConsoleInterface {
         this.UserQuestion = () => this.readline.question('Enter a username, or press ENTER to be a guest: ', (answer) => {
             if (answer) {
                 this.user = answer;
-                console.log(`Welcome, ${this.user}!`);
-                this.FirstQuestion(this.user);
             }
-            this.FirstQuestion();
+            else {
+                this.user = 'guest';
+            }
+            console.log(`Welcome, ${this.user}!`);
+            this.FirstQuestion(this.user);
         });
         this.FirstQuestion = (user) => this.readline.question('Pick your first ingredient: ', (answer) => {
             // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
@@ -44,7 +46,6 @@ class ConsoleInterface {
         };
         this.FinalQuestion = (err, list, mixture) => {
             if (err) {
-                console.log(`err in ThirdQuestion: ${err}`);
                 this.readline.close();
                 console.log(err);
             }
@@ -56,6 +57,7 @@ class ConsoleInterface {
                     // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                     this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                         if (!err) {
+                            this.dataHelper.MakeMixture(list, mixture);
                             this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
                         }
                     });

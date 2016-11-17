@@ -37,6 +37,14 @@ class DataHelper {
         }
     }
 
+    MakeMixture = (list: IngredientList, mixture: Mixture) => {
+        mixture.MakeMixture();
+        //Replace each ingredient in the list with its counterpart in the mixture
+        mixture.ingredients.forEach((ingredient) => {
+            list.ingredientList[list.ingredientList.findIndex((ing) => ing.name === ingredient.name)] = ingredient;
+        })
+    }
+
     private CreateOrAddToMixture = (mixture: Mixture, ingredient: Ingredient): Mixture => {
         //If the mixture is null or undefined, create a new one with the chosen ingredient to start
         if(mixture == null || mixture === undefined){

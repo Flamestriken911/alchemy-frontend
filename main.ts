@@ -1,5 +1,5 @@
-import DataHelper = require('./Data/DataHelper');
-import Ingredient = require('./Components/Ingredient');
+import DataHelper = require('./Backend/Data/DataHelper');
+import Ingredient = require('./Backend/Components/Ingredient');
 import ConsoleInterface = require('./ConsoleInterface');
 
 var dataHelper = new DataHelper();

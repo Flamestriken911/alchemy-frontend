@@ -1,9 +1,9 @@
 import ReadLine = require('readline');
-import DataHelper = require('./Data/DataHelper');
-import DataHandler = require('./Data/DataHandler');
-import Ingredient = require('./Components/Ingredient');
-import IngredientList = require('./Lists and collections/IngredientList');
-import Mixture = require('./Lists and collections/Mixture');
+import DataHelper = require('./Backend/Data/DataHelper');
+import DataHandler = require('./Backend/Data/DataHandler');
+import Ingredient = require('./Backend/Components/Ingredient');
+import IngredientList = require('./Backend/Lists and collections/IngredientList');
+import Mixture = require('./Backend/Lists and collections/Mixture');
 
 class ConsoleInterface{
     dataHelper: DataHelper;
@@ -25,10 +25,11 @@ class ConsoleInterface{
     UserQuestion = () => this.readline.question('Enter a username, or press ENTER to be a guest: ', (answer) => {
         if(answer){
             this.user = answer;
-            console.log(`Welcome, ${this.user}!`);
-            this.FirstQuestion(this.user);
+        } else{
+            this.user = 'guest';
         }
-        this.FirstQuestion();
+        console.log(`Welcome, ${this.user}!`);
+        this.FirstQuestion(this.user);
     })
 
     FirstQuestion = (user?: string) => this.readline.question('Pick your first ingredient: ', (answer) => {
@@ -70,6 +71,7 @@ class ConsoleInterface{
                 // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                 this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                     if(!err){
+                        this.dataHelper.MakeMixture(list, mixture);
                         this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
                     }
                 });                
