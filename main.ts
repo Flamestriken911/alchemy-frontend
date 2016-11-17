@@ -10,4 +10,4 @@ var fileName = 'ingredient info.csv';
 //dataHelper.GetMatches(filePath, fileName, 'Taproot', () => console.log('Done'));
 //dataHelper.GetDiscoveries(filePath, fileName, 'Taproot');
 
-consoleInterface.FirstQuestion();
+consoleInterface.UserQuestion();

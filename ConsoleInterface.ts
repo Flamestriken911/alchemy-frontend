@@ -10,6 +10,7 @@ class ConsoleInterface{
     dataHandler: DataHandler;
     filePath = './Data/';
     fileName = 'ingredient info.csv';
+    user = 'test';
     readline : ReadLine.ReadLine;
 
     constructor(){
@@ -21,11 +22,24 @@ class ConsoleInterface{
         this.dataHandler = new DataHandler();
     }
     
+    UserQuestion = () => this.readline.question('Enter a username, or press ENTER to be a guest: ', (answer) => {
+        if(answer){
+            this.user = answer;
+            console.log(`Welcome, ${this.user}!`);
+            this.FirstQuestion(this.user);
+        }
+        this.FirstQuestion();
+    })
 
-    FirstQuestion = () => this.readline.question('Pick your first ingredient: ', (answer) => {
+    FirstQuestion = (user?: string) => this.readline.question('Pick your first ingredient: ', (answer) => {
         // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
-        this.dataHandler.GetDefaultIngredientList((err, list) => {
-            this.dataHelper.CheckDiscoveriesInList(list,answer, null, this.SecondQuestion);
+        this.dataHandler.GetUserListOrDefault(user, (err, list) => {
+            if(err){
+                this.readline.close();
+                console.log(err);
+            } else{
+                this.dataHelper.CheckDiscoveriesInList(list,answer, null, this.SecondQuestion);
+            }
         });
     })
 
@@ -46,7 +60,6 @@ class ConsoleInterface{
 
     FinalQuestion = (err: any, list: IngredientList, mixture: Mixture) => {
         if(err){
-            console.log(`err in ThirdQuestion: ${err}`);
             this.readline.close();
             console.log(err);
         } else{
@@ -57,8 +70,7 @@ class ConsoleInterface{
                 // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                 this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                     if(!err){
-                        var writestream = new DataHandler('./Data/', 'test.txt');
-                        writestream.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
+                        this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
                     }
                 });                
                 this.readline.close();

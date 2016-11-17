@@ -6,10 +6,25 @@ class ConsoleInterface {
     constructor() {
         this.filePath = './Data/';
         this.fileName = 'ingredient info.csv';
-        this.FirstQuestion = () => this.readline.question('Pick your first ingredient: ', (answer) => {
+        this.user = 'test';
+        this.UserQuestion = () => this.readline.question('Enter a username, or press ENTER to be a guest: ', (answer) => {
+            if (answer) {
+                this.user = answer;
+                console.log(`Welcome, ${this.user}!`);
+                this.FirstQuestion(this.user);
+            }
+            this.FirstQuestion();
+        });
+        this.FirstQuestion = (user) => this.readline.question('Pick your first ingredient: ', (answer) => {
             // this.dataHelper.GetMatches(this.filePath, this.fileName, answer, null, this.SecondQuestion);
-            this.dataHandler.GetDefaultIngredientList((err, list) => {
-                this.dataHelper.CheckDiscoveriesInList(list, answer, null, this.SecondQuestion);
+            this.dataHandler.GetUserListOrDefault(user, (err, list) => {
+                if (err) {
+                    this.readline.close();
+                    console.log(err);
+                }
+                else {
+                    this.dataHelper.CheckDiscoveriesInList(list, answer, null, this.SecondQuestion);
+                }
             });
         });
         this.SecondQuestion = (err, list, mixture) => {
@@ -41,8 +56,7 @@ class ConsoleInterface {
                     // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                     this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                         if (!err) {
-                            var writestream = new DataHandler('./Data/', 'test.txt');
-                            writestream.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
+                            this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
                         }
                     });
                     this.readline.close();

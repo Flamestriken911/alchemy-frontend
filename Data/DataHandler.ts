@@ -8,16 +8,33 @@ class DataHandler {
     get filePath(): string {
         return this.relativePath + this.fileName;
     }
+    private defaultFilePath: string = './Data/test.txt';
+    public relativePath: string = './Data/'
+    get fileName(): string {
+        return (this.user) ? `${this.user}.txt` : 'ingredient info.txt'
+    }
+    public user: string = null;
 
-    // constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.csv') {
-    constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.txt') {
+    constructor(){
     }
 
-    GetDefaultIngredientList = (callback: (err: any, list: IngredientList)=>void) => {
-        var fileReadStream = fs.createReadStream(this.filePath);
+    GetUserListOrDefault = (user: string, callback: (err: any, list: IngredientList)=>void) => {
+        this.user = user;
+        fs.access(this.filePath, (err: NodeJS.ErrnoException) => {
+            if(err){
+                console.log('WARNING: File not found; reading default file');
+                this.GetIngredientList(this.defaultFilePath, callback);
+            } else{
+                this.GetIngredientList(this.filePath, callback);
+            }
+        })
+    }
+
+    GetIngredientList = (filePath: string, callback: (err: any, list: IngredientList)=>void) => {
+        var fileReadStream = fs.createReadStream(filePath);
         var data = '';
         fileReadStream.on('error', () => {
-            callback(`An error occured while attempting to read from ${this.filePath}`, null);
+            callback(`An error occured while attempting to read from ${filePath}`, null);
         })
         fileReadStream.on('data', (chunk) =>{
             data += chunk;
@@ -35,6 +52,8 @@ class DataHandler {
     }
 
     WriteIngredientList = (list: IngredientList, callback) => {
+        console.log(`Current user: ${this.user}`);
+        console.log(`Writing to file: ${this.filePath}`);
         var fileWriteSteam = fs.createWriteStream(this.filePath);
         fileWriteSteam.write(list.ToStorageString());
         fileWriteSteam.close();

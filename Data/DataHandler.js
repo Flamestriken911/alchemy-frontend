@@ -4,15 +4,27 @@ const IngredientList = require('../Lists and collections/IngredientList');
 const Effect = require('../Components/Effect');
 const fs = require('fs');
 class DataHandler {
-    // constructor(public relativePath: string = './Data/', public fileName: string = 'ingredient info.csv') {
-    constructor(relativePath = './Data/', fileName = 'ingredient info.txt') {
-        this.relativePath = relativePath;
-        this.fileName = fileName;
-        this.GetDefaultIngredientList = (callback) => {
-            var fileReadStream = fs.createReadStream(this.filePath);
+    constructor() {
+        this.defaultFilePath = './Data/test.txt';
+        this.relativePath = './Data/';
+        this.user = null;
+        this.GetUserListOrDefault = (user, callback) => {
+            this.user = user;
+            fs.access(this.filePath, (err) => {
+                if (err) {
+                    console.log('WARNING: File not found; reading default file');
+                    this.GetIngredientList(this.defaultFilePath, callback);
+                }
+                else {
+                    this.GetIngredientList(this.filePath, callback);
+                }
+            });
+        };
+        this.GetIngredientList = (filePath, callback) => {
+            var fileReadStream = fs.createReadStream(filePath);
             var data = '';
             fileReadStream.on('error', () => {
-                callback(`An error occured while attempting to read from ${this.filePath}`, null);
+                callback(`An error occured while attempting to read from ${filePath}`, null);
             });
             fileReadStream.on('data', (chunk) => {
                 data += chunk;
@@ -29,6 +41,8 @@ class DataHandler {
             });
         };
         this.WriteIngredientList = (list, callback) => {
+            console.log(`Current user: ${this.user}`);
+            console.log(`Writing to file: ${this.filePath}`);
             var fileWriteSteam = fs.createWriteStream(this.filePath);
             fileWriteSteam.write(list.ToStorageString());
             fileWriteSteam.close();
@@ -46,6 +60,9 @@ class DataHandler {
     }
     get filePath() {
         return this.relativePath + this.fileName;
+    }
+    get fileName() {
+        return (this.user) ? `${this.user}.txt` : 'ingredient info.txt';
     }
 }
 module.exports = DataHandler;
