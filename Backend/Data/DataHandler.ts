@@ -8,8 +8,8 @@ class DataHandler {
     get filePath(): string {
         return this.relativePath + this.fileName;
     }
-    private defaultFilePath: string = './Data/test.txt';
-    public relativePath: string = './Data/'
+    private defaultFilePath: string = './Backend/Data/test.txt';
+    public relativePath: string = './Backend/Data/'
     get fileName(): string {
         return (this.user) ? `${this.user}.txt` : 'ingredient info.txt'
     }

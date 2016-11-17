@@ -6,6 +6,8 @@ class Effect {
         };
         this.name = _effectName;
         this.discovered = _discovered;
+        this.willHaveEffect = false;
+        this.willBeDiscovered = false;
     }
 }
 module.exports = Effect;

@@ -5,8 +5,8 @@ const Effect = require('../Components/Effect');
 const fs = require('fs');
 class DataHandler {
     constructor() {
-        this.defaultFilePath = './Data/test.txt';
-        this.relativePath = './Data/';
+        this.defaultFilePath = './Backend/Data/test.txt';
+        this.relativePath = './Backend/Data/';
         this.user = null;
         this.GetUserListOrDefault = (user, callback) => {
             this.user = user;

@@ -11,6 +11,10 @@ class IngredientList{
         this.ingredientList.forEach((ingredient) => {
             ingredient.addedEffects = 0;
             ingredient.discoveries = 0;
+            ingredient.effects.forEach((effect) => {
+                effect.currentAddedEffectsValue = 0;
+                effect.currentDiscoveryValue = 0;
+            })
         })
     }
 

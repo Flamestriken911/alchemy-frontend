@@ -7,6 +7,10 @@ class IngredientList {
             this.ingredientList.forEach((ingredient) => {
                 ingredient.addedEffects = 0;
                 ingredient.discoveries = 0;
+                ingredient.effects.forEach((effect) => {
+                    effect.currentAddedEffectsValue = 0;
+                    effect.currentDiscoveryValue = 0;
+                });
             });
         };
         //Updates the list with any effect matches given a new ingredient added to the mixture

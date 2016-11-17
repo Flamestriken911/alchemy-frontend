@@ -42,7 +42,8 @@ class Ingredient {
     private DetermineAddedEffects = (effect1: Effect, effect2: Effect) => {
         if(effect1.name === effect2.name){
             //If there's a match, increase the effect value if neither ingredient is already adding to the mixture
-            this.addedEffects += ((effect1.willHaveEffect || effect2.willHaveEffect) ? 0 : 1);
+            effect1.currentAddedEffectsValue = (effect1.willHaveEffect || effect2.willHaveEffect) ? 0 : 1;
+            this.addedEffects += effect1.currentAddedEffectsValue;
         }
     }
 

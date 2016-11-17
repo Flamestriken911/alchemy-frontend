@@ -24,7 +24,9 @@ class Mixture{
             if(indexInPotentialEffects >= 0){
                 // be sure to update the effect as 'will be discovered'
                 effect.willBeDiscovered = true;
+                effect.willHaveEffect = true;
                 this.potentialEffects[indexInPotentialEffects].willBeDiscovered = true;
+                this.potentialEffects[indexInPotentialEffects].willHaveEffect = true;
                 //Move the effect from potential to actual effects arrays
                 this.actualEffects.push(...this.potentialEffects.splice(indexInPotentialEffects, 1));
             } else {
@@ -33,6 +35,7 @@ class Mixture{
                     this.potentialEffects.push(effect);
                 } else {
                     // be sure to update the effect as 'will be discovered'
+                    effect.willHaveEffect = true;
                     effect.willBeDiscovered = true;
                 }
             }

@@ -25,7 +25,7 @@ class ConsoleInterface {
                     console.log(err);
                 }
                 else {
-                    this.dataHelper.CheckDiscoveriesInList(list, answer, null, this.SecondQuestion);
+                    this.dataHelper.CheckMatchesInList(list, answer, null, this.SecondQuestion);
                 }
             });
         });
@@ -35,12 +35,12 @@ class ConsoleInterface {
                 console.log(err);
             }
             else {
-                this.PrintDiscoveries(list, mixture);
-                // this.PrintMatches(list, mixture);
+                // this.PrintDiscoveries(list, mixture);
+                this.PrintMatches(list, mixture);
                 list.Reset();
                 this.readline.question('\nPick your second ingredient: ', (answer) => {
-                    // this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
-                    this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, this.FinalQuestion);
+                    this.dataHelper.CheckMatchesInList(list, answer, mixture, this.FinalQuestion);
+                    // this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, this.FinalQuestion);
                 });
             }
         };
@@ -50,12 +50,13 @@ class ConsoleInterface {
                 console.log(err);
             }
             else {
-                this.PrintDiscoveries(list, mixture);
-                // this.PrintMatches(list, mixture);
+                // this.PrintDiscoveries(list, mixture);
+                this.PrintMatches(list, mixture);
                 list.Reset();
                 this.readline.question('\nPick your third and final ingredient: ', (answer) => {
                     // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
-                    this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
+                    this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => {
+                        // this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                         if (!err) {
                             this.dataHelper.MakeMixture(list, mixture);
                             this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
@@ -69,7 +70,7 @@ class ConsoleInterface {
             console.log(`\n`);
             list.ingredientList.forEach((ingredient) => {
                 if (ingredient.addedEffects > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)) {
-                    console.log(`${ingredient.name}: ${ingredient.addedEffects} potential matches`);
+                    console.log(`${ingredient.name}:${(ingredient.name.length < 15) ? (ingredient.name.length < 7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.addedEffects} effects:\t${ingredient.effects.filter((eff) => eff.currentAddedEffectsValue > 0).map((eff) => eff.name).join(',\t')}`);
                 }
             });
         };
@@ -77,7 +78,7 @@ class ConsoleInterface {
             console.log(`\n`);
             list.ingredientList.forEach((ingredient) => {
                 if (ingredient.discoveries > 0 && !mixture.ingredients.some((i) => i.name === ingredient.name)) {
-                    console.log(`${ingredient.name}: ${ingredient.discoveries} potential discoveries`);
+                    console.log(`${ingredient.name}:${(ingredient.name.length < 15) ? (ingredient.name.length < 7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.discoveries} discoveries:\t${ingredient.effects.filter((eff) => eff.currentDiscoveryValue > 0).map((eff) => eff.name).join(',\t')}`);
                 }
             });
         };
