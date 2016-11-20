@@ -51,9 +51,7 @@ class ConsoleInterface {
                 this.PrintMatches(list, mixture);
                 list.Reset();
                 this.readline.question('\nPick your third and final ingredient: ', (answer) => {
-                    // this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => console.log('Success!'));
                     this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => {
-                        // this.dataHelper.CheckDiscoveriesInList(list, answer, mixture, (err, list) => {
                         if (!err) {
                             this.dataHelper.MakeMixture(list, mixture);
                             this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
@@ -80,7 +78,6 @@ class ConsoleInterface {
                 ingredient.effects.forEach((effect, index) => {
                     var currentEffectString = this.GetEffectMatchString(effect);
                     if (currentEffectString) {
-                        // console.log(`${ingredient.name}:${(ingredient.name.length<15) ? (ingredient.name.length<7 ? '\t\t\t' : '\t\t') : '\t'}${ingredient.addedEffects} effects:\t${
                         matchesString += `${(matchesString.length === (ingredient.name + ':').length) ? '\t' : ', '} ${currentEffectString}`;
                     }
                 });
