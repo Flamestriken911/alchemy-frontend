@@ -11,6 +11,8 @@ class Effect{
         this.discovered = _discovered;
         this.willHaveEffect = false;
         this.willBeDiscovered = false;
+        this.currentDiscoveryValue = 0;
+        this.currentAddedEffectsValue = 0;
     }
     ToStorageString = () => {
         return this.name + ':' + this.discovered;

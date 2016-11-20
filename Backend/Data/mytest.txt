@@ -22,7 +22,7 @@ Charred Skeever Hide,Restore Stamina:false,Resist Poison:false,Restore Health:fa
 Chaurus Eggs,Weakness to Poison:false,Damage Magicka:false,Invisibility:false,Fortify Stamina:false
 Chaurus Hunter Antennae,Damage Stamina:false,Damage Magicka Regen:false,Fortify Enchanting:false,Fortify Conjuration:false
 Chicken's Egg,Resist Magic:false,Waterbreathing:false,Lingering Damage Stamina:false,Damage Magicka Regen:false
-Creep Cluster,Restore Magicka:false,Fortify Carry Weight:false,Weakness to Magic:false,Damage Stamina Regen:false
+Creep Cluster,Restore Magicka:true,Fortify Carry Weight:false,Weakness to Magic:false,Damage Stamina Regen:true
 Crimson Nirnroot,Damage Health:false,Invisibility:false,Resist Magic:false,Damage Stamina:false
 Cyrodilic Spadetail,Damage Stamina:false,Fear:false,Ravage Health:false,Fortify Restoration:false
 Daedra Heart,Restore Health:false,Damage Magicka:false,Fear:false,Damage Stamina Regen:false
@@ -61,7 +61,7 @@ Imp Stool,Damage Health:false,Paralysis:false,Restore Health:false,Lingering Dam
 Jarrin Root,Damage Health:false,Damage Stamina:false,Damage Magicka Regen:false,Damage Magicka:false
 Jazbay Grapes,Weakness to Magic:false,Regenerate Magicka:false,Ravage Health:false,Fortify Magicka:false
 Juniper Berries,Weakness to Fire:false,Regenerate Health:false,Damage Stamina Regen:false,Fortify Marksman:false
-Large Antlers,Restore Stamina:false,Slow:false,Damage Stamina Regen:false,Fortify Stamina:false
+Large Antlers,Restore Stamina:true,Slow:false,Damage Stamina Regen:true,Fortify Stamina:false
 Lavender,Resist Magic:false,Ravage Magicka:false,Fortify Conjuration:false,Fortify Stamina:false
 Luna Moth Wing,Damage Magicka:false,Regenerate Health:false,Invisibility:false,Fortify Light Armor:false
 Moon Sugar,Weakness to Fire:false,Restore Magicka:false,Regenerate Magicka:false,Resist Frost:false
@@ -73,7 +73,7 @@ Nightshade,Damage Health:false,Lingering Damage Stamina:false,Fortify Destructio
 Nirnroot,Damage Health:false,Invisibility:false,Resist Magic:false,Damage Stamina:false
 Nordic Barnacle,Damage Magicka:false,Regenerate Health:false,Fortify Pickpocket:false,Waterbreathing:false
 Orange Dartwing,Restore Stamina:false,Fortify Pickpocket:false,Lingering Damage Health:false,Ravage Magicka:false
-Pearl,Restore Stamina:true,Restore Magicka:true,Resist Shock:undefined,Fortify Block:undefined
+Pearl,Restore Stamina:true,Restore Magicka:true,Resist Shock:false,Fortify Block:false
 Pine Thrush Egg,Restore Stamina:false,Weakness to Poison:false,Resist Shock:false,Fortify Lockpicking:false
 Poison Bloom,Damage Health:false,Fortify Carry Weight:false,Fear:false,Slow:false
 Powdered Mammoth Tusk,Restore Stamina:false,Weakness to Fire:false,Fear:false,Fortify Sneak:false

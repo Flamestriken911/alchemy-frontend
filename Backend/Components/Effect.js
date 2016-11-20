@@ -8,6 +8,8 @@ class Effect {
         this.discovered = _discovered;
         this.willHaveEffect = false;
         this.willBeDiscovered = false;
+        this.currentDiscoveryValue = 0;
+        this.currentAddedEffectsValue = 0;
     }
 }
 module.exports = Effect;

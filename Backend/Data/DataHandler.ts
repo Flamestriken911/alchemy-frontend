@@ -68,7 +68,6 @@ class DataHandler {
             var effectSplit = ingredientString_Split[i].split(':');
             var effectName = effectSplit[0];
             var effectIsDiscovered = effectSplit[1] === 'true';
-            if(effectIsDiscovered || effectSplit[1] !== 'false') console.log(`${ingredientName}: ${effectName}: ${effectIsDiscovered} === ${effectSplit[1]}`);
             effects[i-1] = new Effect(effectName, effectIsDiscovered);
         }
         return new Ingredient(ingredientName, [effects[0],effects[1],effects[2],effects[3]]);

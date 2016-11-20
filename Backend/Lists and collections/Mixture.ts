@@ -41,7 +41,6 @@ class Mixture{
             }
         })
         this.ingredients.push(ingredient);
-        console.log(`Ingredient added: ${ingredient.name}`);
         console.log(`Current ingredients: ${this.ingredients.map((i)=>i.name).join(', ')}`);
         console.log(`Current potential effects: ${this.potentialEffects.map((e)=>e.name).join(', ')}`);
         console.log(`Current actual effects: ${this.actualEffects.map((e)=>e.name).join(', ')}`);

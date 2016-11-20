@@ -1,0 +1,111 @@
+Abecean Longfin,Weakness to Frost:false,Weakness to Poison:true,Fortify Restoration:true,Fortify Sneak:false
+Ancestor Moth Wing,Damage Stamina:false,Damage Magicka Regen:false,Fortify Enchanting:false,Fortify Conjuration:false
+Ash Creep Cluster,Damage Stamina:false,Resist Fire:false,Fortify Destruction:false,Invisibility:false
+Ash Hopper Jelly,Restore Health:false,Resist Shock:false,Weakness to Frost:false,Fortify Light Armor:false
+Ashen Grass Pod,Resist Fire:false,Fortify Lockpicking:false,Fortify Sneak:false,Weakness to Shock:false
+Bear Claws,Restore Stamina:false,Fortify OneHanded:false,Damage Magicka Regen:false,Fortify Health:false
+Bee,Restore Stamina:true,Regenerate Stamina:false,Weakness to Shock:false,Ravage Stamina:true
+Beehive Husk,Resist Poison:false,Fortify Sneak:false,Fortify Destruction:true,Fortify Light Armor:false
+Berit's Ashes,Damage Stamina:false,Fortify Conjuration:false,Ravage Stamina:false,Resist Fire:false
+Bleeding Crown,Weakness to Fire:true,Weakness to Poison:false,Resist Magic:false,Fortify Block:false
+Blisterwort,Damage Stamina:true,Restore Health:true,Fortify Smithing:false,Frenzy:false
+Blue Butterfly Wing,Damage Stamina:true,Damage Magicka Regen:true,Fortify Enchanting:true,Fortify Conjuration:true
+Blue Dartwing,Resist Shock:false,Restore Health:false,Fear:true,Fortify Pickpocket:false
+Blue Mountain Flower,Restore Health:true,Fortify Health:true,Damage Magicka Regen:true,Fortify Conjuration:true
+Boar Tusk,Fortify Stamina:false,Fortify Block:false,Frenzy:false,Fortify Health:false
+Bone Meal,Damage Stamina:false,Fortify Conjuration:false,Ravage Stamina:true,Resist Fire:false
+Briar Heart,Restore Magicka:false,Paralysis:false,Fortify Magicka:true,Fortify Block:true
+Burnt Spriggan Wood,Weakness to Fire:false,Damage Magicka Regen:false,Slow:false,Fortify Alteration:false
+Butterfly Wing,Restore Health:false,Lingering Damage Stamina:true,Damage Magicka:false,Fortify Barter:true
+Canis Root,Damage Stamina:true,Fortify Marksman:false,Paralysis:false,Fortify OneHanded:true
+Charred Skeever Hide,Restore Stamina:true,Resist Poison:true,Restore Health:true,Cure Disease:true
+Chaurus Eggs,Weakness to Poison:false,Damage Magicka:false,Invisibility:false,Fortify Stamina:false
+Chaurus Hunter Antennae,Damage Stamina:false,Damage Magicka Regen:false,Fortify Enchanting:false,Fortify Conjuration:false
+Chicken's Egg,Resist Magic:true,Waterbreathing:false,Lingering Damage Stamina:true,Damage Magicka Regen:false
+Creep Cluster,Restore Magicka:false,Fortify Carry Weight:true,Weakness to Magic:true,Damage Stamina Regen:true
+Crimson Nirnroot,Damage Health:false,Invisibility:false,Resist Magic:false,Damage Stamina:false
+Cyrodilic Spadetail,Damage Stamina:false,Fear:true,Ravage Health:true,Fortify Restoration:false
+Daedra Heart,Restore Health:true,Damage Magicka:true,Fear:true,Damage Stamina Regen:false
+Deathbell,Damage Health:true,Slow:true,Weakness to Poison:false,Ravage Stamina:true
+Dragon's Tongue,Resist Fire:true,Fortify Illusion:false,Fortify Twohanded:true,Fortify Barter:false
+Dwarven Oil,Weakness to Magic:false,Regenerate Magicka:false,Restore Magicka:false,Fortify Illusion:false
+Ectoplasm,Restore Magicka:true,Fortify Magicka:true,Damage Health:true,Fortify Destruction:false
+Elves Ear,Restore Magicka:false,Weakness to Frost:false,Resist Fire:false,Fortify Marksman:true
+Emperor Parasol Moss,Damage Health:false,Regenerate Health:false,Fortify TwoHanded:false,Fortify Magicka:false
+Eye of Sabre Cat,Restore Stamina:false,Damage Magicka:false,Restore Health:false,Ravage Health:false
+Falmer Ear,Damage Health:false,Resist Poison:false,Fortify Lockpicking:false,Frenzy:false
+Felsaad Tern Feathers,Restore Health:false,Cure Disease:false,Resist Magic:false,Fortify Light Armor:false
+Fire Salts,Weakness to Frost:false,Restore Magicka:true,Regenerate Magicka:true,Resist Fire:true
+Fly Amanita,Resist Fire:true,Frenzy:true,Regenerate Stamina:false,Fortify Twohanded:true
+Frost Mirriam,Resist Frost:true,Ravage Magicka:false,Damage Stamina Regen:true,Fortify Sneak:true
+Frost Salts,Weakness to Fire:true,Restore Magicka:false,Fortify Conjuration:false,Resist Frost:true
+Garlic,Resist Poison:true,Regenerate Magicka:false,Regenerate Health:true,Fortify Stamina:true
+Giant Lichen,Weakness to Shock:true,Weakness to Poison:false,Restore Magicka:false,Ravage Health:false
+Giant's Toe,Damage Stamina:false,Fortify Carry Weight:true,Damage Stamina Regen:true,Fortify Health:false
+Gleamblossom,Resist Magic:false,Regenerate Health:false,Paralysis:false,Fear:false
+Glow Dust,Damage Magicka:false,Fortify Destruction:false,Resist Shock:false,Damage Magicka Regen:false
+Glowing Mushroom,Resist Shock:true,Fortify Smithing:false,Fortify Health:false,Fortify Destruction:true
+Grass Pod,Resist Poison:false,Fortify Alteration:false,Restore Magicka:false,Ravage Magicka:false
+Hagraven Claw,Resist Magic:false,Fortify Enchanting:false,Fortify Barter:false,Lingering Damage Magicka:false
+Hagraven Feathers,Damage Magicka:false,Frenzy:false,Weakness to Shock:true,Fortify Conjuration:true
+Hanging Moss,Damage Magicka:false,Damage Magicka Regen:false,Fortify OneHanded:false,Fortify Health:false
+Hawk Beak,Restore Stamina:true,Fortify Carry Weight:false,Resist Shock:true,Resist Frost:true
+Hawk Feathers,Cure Disease:false,Fortify OneHanded:false,Fortify Sneak:false,Fortify Light Armor:false
+Hawk's Egg,Resist Magic:false,Waterbreathing:false,Lingering Damage Stamina:false,Damage Magicka Regen:false
+Histcarp,Restore Stamina:true,Damage Stamina Regen:true,Waterbreathing:false,Fortify Magicka:false
+Honeycomb,Restore Stamina:true,Fortify Light Armor:true,Ravage Stamina:true,Fortify Block:false
+Human Flesh,Damage Health:false,Restore Magicka:false,Fortify Sneak:false,Paralysis:false
+Human Heart,Damage Health:false,Damage Magicka Regen:false,Frenzy:false,Damage Magicka:false
+Ice Wraith Teeth,Weakness to Frost:false,Invisibility:true,Weakness to Fire:false,Fortify Heavy Armor:false
+Imp Stool,Damage Health:true,Paralysis:false,Restore Health:false,Lingering Damage Health:false
+Jarrin Root,Damage Health:false,Damage Stamina:false,Damage Magicka Regen:false,Damage Magicka:false
+Jazbay Grapes,Weakness to Magic:false,Regenerate Magicka:false,Ravage Health:true,Fortify Magicka:false
+Juniper Berries,Weakness to Fire:true,Regenerate Health:false,Damage Stamina Regen:false,Fortify Marksman:true
+Large Antlers,Restore Stamina:true,Slow:false,Damage Stamina Regen:false,Fortify Stamina:true
+Lavender,Resist Magic:false,Ravage Magicka:false,Fortify Conjuration:true,Fortify Stamina:false
+Luna Moth Wing,Damage Magicka:true,Regenerate Health:true,Invisibility:true,Fortify Light Armor:false
+Moon Sugar,Weakness to Fire:false,Restore Magicka:true,Regenerate Magicka:true,Resist Frost:true
+Mora Tapinella,Restore Magicka:true,Regenerate Stamina:false,Fortify Illusion:true,Lingering Damage Health:false
+Mudcrab Chitin,Restore Stamina:true,Resist Poison:true,Resist Fire:false,Cure Disease:true
+Namira's Rot,Damage Magicka:true,Fear:false,Regenerate Health:true,Fortify Lockpicking:false
+Netch Jelly,Paralysis:false,Restore Stamina:false,Fear:false,Fortify Carry Weight:false
+Nightshade,Damage Health:true,Lingering Damage Stamina:true,Fortify Destruction:false,Damage Magicka Regen:false
+Nirnroot,Damage Health:false,Invisibility:false,Resist Magic:true,Damage Stamina:true
+Nordic Barnacle,Damage Magicka:false,Regenerate Health:true,Fortify Pickpocket:true,Waterbreathing:false
+Orange Dartwing,Restore Stamina:false,Fortify Pickpocket:true,Lingering Damage Health:true,Ravage Magicka:true
+Pearl,Restore Stamina:false,Restore Magicka:false,Resist Shock:false,Fortify Block:false
+Pine Thrush Egg,Restore Stamina:true,Weakness to Poison:false,Resist Shock:true,Fortify Lockpicking:false
+Poison Bloom,Damage Health:false,Fortify Carry Weight:false,Fear:false,Slow:false
+Powdered Mammoth Tusk,Restore Stamina:true,Weakness to Fire:true,Fear:false,Fortify Sneak:true
+Purple Mountain Flower,Restore Stamina:true,Lingering Damage Magicka:false,Resist Frost:true,Fortify Sneak:true
+Red Mountain Flower,Restore Magicka:true,Fortify Magicka:true,Damage Health:true,Ravage Magicka:true
+River Betty,Damage Health:true,Slow:true,Fortify Carry Weight:false,Fortify Alteration:false
+Rock Warbler Egg,Restore Health:true,Damage Stamina:true,Weakness to Magic:false,Fortify OneHanded:true
+Sabre Cat Tooth,Restore Stamina:false,Fortify Smithing:false,Weakness to Poison:false,Fortify Heavy Armor:false
+Salmon Roe,Restore Stamina:false,Fortify Magicka:false,Regenerate Magicka:false,Waterbreathing:false
+Salt Pile,Weakness to Magic:true,Slow:false,Regenerate Magicka:true,Fortify Restoration:false
+Scaly Pholiota,Weakness to Magic:true,Regenerate Stamina:false,Fortify Carry Weight:true,Fortify Illusion:false
+Scathecraw,Ravage Health:false,Ravage Magicka:false,Lingering Damage Health:false,Ravage Stamina:false
+Silverside Perch,Restore Stamina:true,Ravage Health:false,Resist Frost:false,Damage Stamina Regen:true
+Skeever Tail,Damage Stamina Regen:false,Damage Health:true,Fortify Light Armor:false,Ravage Health:true
+Slaughterfish Egg,Resist Poison:true,Lingering Damage Health:false,Fortify Stamina:true,Fortify Pickpocket:true
+Slaughterfish Scales,Resist Frost:true,Fortify Heavy Armor:true,Fortify Block:false,Lingering Damage Health:true
+Small Antlers,Weakness to Poison:true,Lingering Damage Stamina:true,Damage Health:true,Fortify Restoration:true
+Small Pearl,Restore Stamina:false,Fortify Restoration:false,Resist Frost:false,Fortify OneHanded:false
+Snowberries,Resist Fire:true,Resist Frost:true,Resist Shock:false,Fortify Enchanting:false
+Spawn Ash,Ravage Stamina:false,Fortify Enchanting:false,Ravage Magicka:false,Resist Fire:false
+Spider Egg,Damage Stamina:true,Fortify Lockpicking:false,Fortify Marksman:false,Damage Magicka Regen:true
+Spriggan Sap,Damage Magicka Regen:true,Fortify Smithing:false,Fortify Alteration:false,Fortify Enchanting:true
+Swamp Fungal Pod,Resist Shock:false,Paralysis:false,Restore Health:false,Lingering Damage Magicka:false
+Taproot,Weakness to Magic:true,Regenerate Magicka:true,Restore Magicka:true,Fortify Illusion:true
+Thistle Branch,Resist Frost:true,Resist Poison:true,Fortify Heavy Armor:true,Ravage Stamina:false
+Torchbug Thorax,Restore Stamina:true,Weakness to Magic:true,Fortify Stamina:true,Lingering Damage Magicka:false
+Trama Root,Weakness to Shock:false,Damage Magicka:false,Slow:false,Fortify Carry Weight:false
+Troll Fat,Resist Poison:false,Frenzy:true,Damage Health:false,Fortify Twohanded:true
+Tundra Cotton,Resist Magic:true,Fortify Block:true,Fortify Barter:false,Fortify Magicka:true
+Vampire Dust,Invisibility:false,Regenerate Health:false,Cure Disease:false,Restore Magicka:false
+Void Salts,Weakness to Shock:false,Damage Health:false,Fortify Magicka:false,Resist Magic:false
+Wheat,Restore Health:true,Damage Stamina Regen:false,Lingering Damage Magicka:false,Fortify Health:true
+White Cap,Weakness to Frost:true,Restore Magicka:true,Ravage Magicka:false,Fortify Heavy Armor:true
+Wisp Wrappings,Restore Stamina:false,Fortify Carry Weight:false,Resist Magic:false,Fortify Destruction:false
+Yellow Mountain Flower,Resist Poison:false,Fortify Health:false,Damage Stamina Regen:false,Fortify Restoration:false
