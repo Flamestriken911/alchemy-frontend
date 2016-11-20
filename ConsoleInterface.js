@@ -10,11 +10,12 @@ class ConsoleInterface {
         this.UserQuestion = () => this.readline.question('Enter a username, or press ENTER to be a guest: ', (answer) => {
             if (answer) {
                 this.user = answer;
+                console.log(`Welcome, ${this.user}!`);
             }
             else {
-                this.user = 'guest';
+                this.user = null;
+                console.log(`Welcome, guest!`);
             }
-            console.log(`Welcome, ${this.user}!`);
             this.FirstQuestion(this.user);
         });
         this.FirstQuestion = (user) => this.readline.question('Pick your first ingredient: ', (answer) => {
@@ -54,12 +55,24 @@ class ConsoleInterface {
                     this.dataHelper.CheckMatchesInList(list, answer, mixture, (err, list) => {
                         if (!err) {
                             this.dataHelper.MakeMixture(list, mixture);
-                            this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
+                            if (this.user !== null) {
+                                this.dataHandler.WriteIngredientList(list, (message) => console.log(`SUCCESS: ${message}`));
+                            }
+                            this.MakeAnother();
                         }
                     });
-                    this.readline.close();
                 });
             }
+        };
+        this.MakeAnother = () => {
+            this.readline.question('Would you like to make another mixture? y/n: ', (answer) => {
+                if (answer === 'y') {
+                    this.FirstQuestion(this.user);
+                }
+                else {
+                    this.readline.close();
+                }
+            });
         };
         this.PrintMatches = (list, mixture) => {
             console.log(`\n`);
