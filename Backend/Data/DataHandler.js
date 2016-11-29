@@ -30,7 +30,7 @@ class DataHandler {
                 data += chunk;
             });
             fileReadStream.on('end', () => {
-                console.log('SUCCESS: Data read from file');
+                console.log(`SUCCESS: Data read from file ${filePath}`);
                 //NOTE: The line splitting creates a final, empty line
                 var lines = data.split('\n');
                 var listObject = new IngredientList();
