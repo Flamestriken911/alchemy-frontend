@@ -2,8 +2,11 @@
   "scripts": {
     "start": "node main.js",
     "test": "mocha"
-  }
+  },
   "devDependencies": {
     "chai": "^3.5.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
   }
 }
