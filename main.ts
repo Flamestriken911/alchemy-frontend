@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
         if(err){
             res.sendStatus(500);
         } else {
-            console.log(req.query.id);
+            console.log(JSON.stringify(list));
             dataHelper.CheckMatchesInList(list,req.query.id,(err, list) => {
                 if(err){
                     res.sendStatus(500);

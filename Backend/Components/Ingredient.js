@@ -1,6 +1,6 @@
 "use strict";
 class Ingredient {
-    constructor(_name, _effects) {
+    constructor(_id, _name, _effects) {
         //Helper method that uses checker method to compare effects in an ingredient to effects in a list of effects in the mixture
         this.UpdateIngredientWithMatches = (effectsToLookFor, matchCounterFunction) => {
             this.effects.forEach((effect) => {
@@ -38,12 +38,13 @@ class Ingredient {
             }
         };
         this.ToStorageString = () => {
-            var storageString = this.name;
+            var storageString = `${this.id},${this.name}`;
             this.effects.forEach((effect) => {
                 storageString += ',' + effect.ToStorageString();
             });
             return storageString;
         };
+        this.id = _id;
         this.name = _name;
         this.effects = _effects;
         this.addedEffects = 0;

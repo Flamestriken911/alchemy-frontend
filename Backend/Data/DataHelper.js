@@ -2,14 +2,14 @@
 const Mixture = require('../Lists and collections/Mixture');
 class DataHelper {
     constructor() {
-        this.CheckMatchesInList = (list, ingredientName, callback) => {
+        this.CheckMatchesInList = (list, ingredientIds, callback) => {
             var err = null;
             var ingredientsInMixture = [];
-            ingredientName.forEach((ingredient) => {
-                ingredientsInMixture.push(list.ingredientList.find(ing => ing.name.toLowerCase() === ingredient.toLowerCase()));
+            ingredientIds.forEach((id) => {
+                ingredientsInMixture.push(list.ingredients.find(ing => ing.id === +id));
             });
-            if (ingredientsInMixture.some((ing) => ing.name === undefined)) {
-                err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
+            if (ingredientsInMixture.some((ing) => ing === undefined)) {
+                err = `ERROR: Ingredient name '${ingredientIds}' is invalid`;
                 callback(err, null, null);
             }
             else {
@@ -22,7 +22,7 @@ class DataHelper {
             mixture.MakeMixture();
             //Replace each ingredient in the list with its counterpart in the mixture
             mixture.ingredients.forEach((ingredient) => {
-                list.ingredientList[list.ingredientList.findIndex((ing) => ing.name === ingredient.name)] = ingredient;
+                list.ingredients[list.ingredients.findIndex((ing) => ing.name === ingredient.name)] = ingredient;
             });
         };
         this.CreateMixture = (ingredients) => {

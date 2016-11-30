@@ -2,11 +2,13 @@ import Effect = require('./Effect');
 
 class Ingredient {
     name: string;
+    id: number;
     effects: Effect[];
     addedEffects: number; //Number of effect matches added by this ingredient to the current mixture
     discoveries: number; //Number of effect discoveries added by this ingredient to the current mixture
     
-    constructor(_name: string, _effects: Effect[]){
+    constructor(_id: number, _name: string, _effects: Effect[]){
+        this.id = _id;
         this.name = _name;
         this.effects = _effects;
         this.addedEffects = 0;
@@ -51,7 +53,7 @@ class Ingredient {
     }
 
     ToStorageString = () => {
-        var storageString = this.name;
+        var storageString = `${this.id},${this.name}`;
         this.effects.forEach((effect) => {
             storageString += ',' + effect.ToStorageString();
         })

@@ -8,10 +8,11 @@ class DataHandler {
     get filePath(): string {
         return this.relativePath + this.fileName;
     }
-    private defaultFilePath: string = './Backend/Data/test.txt';
+    private defaultFileName = 'test.txt';
     public relativePath: string = './Backend/Data/'
+    private defaultFilePath: string = `${this.relativePath}${this.defaultFileName}`
     get fileName(): string {
-        return (this.user) ? `${this.user}.txt` : 'ingredient info.txt'
+        return (this.user) ? `${this.user}.txt` : this.defaultFileName;
     }
     public user: string = null;
 
@@ -45,7 +46,7 @@ class DataHandler {
             var lines = data.split('\n');
             var listObject = new IngredientList();
             for(var i=0; i<lines.length-1; i++){
-                listObject.ingredientList.push(this.ParseIngredientString(lines[i]));
+                listObject.ingredients.push(this.ParseIngredientString(lines[i]));
             }
             callback(null, listObject);
         })
@@ -61,16 +62,17 @@ class DataHandler {
     }
 
     ParseIngredientString = (ingredientString: string): Ingredient => {
-        var ingredientString_Split = ingredientString.replace(/[^a-zA-Z',: ]/g, '').split(',');
-        var ingredientName = ingredientString_Split[0];
+        var ingredientString_Split = ingredientString.replace(/[^a-zA-Z0-9',: ]/g, '').split(',');
+        var ingredientId = +ingredientString_Split[0];
+        var ingredientName = ingredientString_Split[1];
         var effects = [];
-        for(var i=1; i<ingredientString_Split.length; i++){
+        for(var i=2; i<ingredientString_Split.length; i++){
             var effectSplit = ingredientString_Split[i].split(':');
             var effectName = effectSplit[0];
             var effectIsDiscovered = effectSplit[1] === 'true';
             effects[i-1] = new Effect(effectName, effectIsDiscovered);
         }
-        return new Ingredient(ingredientName, [effects[0],effects[1],effects[2],effects[3]]);
+        return new Ingredient(ingredientId, ingredientName, effects);
     };
 }
 
