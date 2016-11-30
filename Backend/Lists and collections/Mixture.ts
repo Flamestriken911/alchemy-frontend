@@ -6,12 +6,11 @@ class Mixture{
     ingredients: Ingredient[] = [];
     potentialEffects: Effect[] = []; //Effects only in a single ingredient in the mixture
     actualEffects: Effect[] = []; //Effects in at least two ingredients in the mixture
-    constructor(ingredient: Ingredient){
-        this.ingredients[0] = ingredient;
-        this.potentialEffects = [...ingredient.effects];
-        console.log(`The mixture currently includes the following ingredients: ${this.ingredients.map((ingredient)=>ingredient.name).join(', ')}`);
-        console.log(`The mixture currently has the following potential effects: ${this.potentialEffects.map((effect)=>effect.name).join(', ')}`);
 
+    constructor(ingredients: Ingredient[]){
+        ingredients.forEach((ingredient) => {
+            this.AddIngredient(ingredient);
+        })
     }
 
     AddIngredient = (ingredient: Ingredient) =>{
@@ -41,9 +40,6 @@ class Mixture{
             }
         })
         this.ingredients.push(ingredient);
-        console.log(`Current ingredients: ${this.ingredients.map((i)=>i.name).join(', ')}`);
-        console.log(`Current potential effects: ${this.potentialEffects.map((e)=>e.name).join(', ')}`);
-        console.log(`Current actual effects: ${this.actualEffects.map((e)=>e.name).join(', ')}`);
         return this;
     }
 

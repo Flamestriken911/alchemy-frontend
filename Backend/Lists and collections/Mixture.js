@@ -1,7 +1,7 @@
 "use strict";
 //Represents the current mixture's ingredients and effects
 class Mixture {
-    constructor(ingredient) {
+    constructor(ingredients) {
         this.ingredients = [];
         this.potentialEffects = []; //Effects only in a single ingredient in the mixture
         this.actualEffects = []; //Effects in at least two ingredients in the mixture
@@ -34,9 +34,6 @@ class Mixture {
                 }
             });
             this.ingredients.push(ingredient);
-            console.log(`Current ingredients: ${this.ingredients.map((i) => i.name).join(', ')}`);
-            console.log(`Current potential effects: ${this.potentialEffects.map((e) => e.name).join(', ')}`);
-            console.log(`Current actual effects: ${this.actualEffects.map((e) => e.name).join(', ')}`);
             return this;
         };
         //Currently just finalizes all effect discoveries
@@ -47,10 +44,9 @@ class Mixture {
                 });
             });
         };
-        this.ingredients[0] = ingredient;
-        this.potentialEffects = [...ingredient.effects];
-        console.log(`The mixture currently includes the following ingredients: ${this.ingredients.map((ingredient) => ingredient.name).join(', ')}`);
-        console.log(`The mixture currently has the following potential effects: ${this.potentialEffects.map((effect) => effect.name).join(', ')}`);
+        ingredients.forEach((ingredient) => {
+            this.AddIngredient(ingredient);
+        });
     }
 }
 module.exports = Mixture;

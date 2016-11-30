@@ -7,16 +7,21 @@ import DataHandler = require('./DataHandler');
 class DataHelper {
     constructor(){}
 
-    CheckMatchesInList = (list: IngredientList, ingredientName: string, mixture: Mixture, 
+    CheckMatchesInList = (list: IngredientList, ingredientName: string[], 
     callback: (err: any, list: IngredientList, mixture: Mixture)=>void): void => {
         var err = null;
-        var ingredient = list.ingredientList.find(ing => ing.name.toLowerCase() === ingredientName.toLowerCase());
+        var ingredientsInMixture: Ingredient[] = [];
+        ingredientName.forEach((ingredient) => {
+            ingredientsInMixture.push(
+                list.ingredientList.find(ing => ing.name.toLowerCase() === ingredient.toLowerCase())
+            )
+        });
 
-        if(ingredient === undefined){
+        if(ingredientsInMixture.some((ing) => ing.name === undefined)){
             err = `ERROR: Ingredient name '${ingredientName}' is invalid`;
             callback(err, null, null);
         } else{
-            mixture = this.CreateOrAddToMixture(mixture, ingredient);
+            var mixture = this.CreateMixture(ingredientsInMixture);
             list.UpdateWithMatches(mixture);
             callback(null, list, mixture);
         }
@@ -30,13 +35,9 @@ class DataHelper {
         })
     }
 
-    private CreateOrAddToMixture = (mixture: Mixture, ingredient: Ingredient): Mixture => {
+    private CreateMixture = (ingredients: Ingredient[]): Mixture => {
         //If the mixture is null or undefined, create a new one with the chosen ingredient to start
-        if(mixture == null || mixture === undefined){
-                return new Mixture(ingredient);
-        } else{
-            return mixture.AddIngredient(ingredient);
-        }
+        return new Mixture(ingredients);
     }
 }
 

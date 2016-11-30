@@ -13,11 +13,11 @@ class Ingredient {
         this.discoveries = 0;
     }
 
-    //Helper method that uses checker method to compare effects in an ingredient to effects in some a list of effects
+    //Helper method that uses checker method to compare effects in an ingredient to effects in a list of effects in the mixture
     UpdateIngredientWithMatches = (effectsToLookFor: Effect[], matchCounterFunction) => {
         this.effects.forEach((effect) => {
-            effectsToLookFor.forEach((effectToLookFor) => {
-                matchCounterFunction(effect, effectToLookFor);
+            effectsToLookFor.forEach((mixtureEffect) => {
+                matchCounterFunction(effect, mixtureEffect);
             })
         })
     }
@@ -25,17 +25,27 @@ class Ingredient {
     DetermineDiscoveries = (effect1: Effect, effect2: Effect) => {
         if(effect1.name === effect2.name){
             //If there's a match, update the discovery value of each effect if appropriate
-            effect1.currentDiscoveryValue = (effect1.discovered || effect1.willBeDiscovered) ? 0 : 1;
-            effect2.currentDiscoveryValue = (effect2.discovered || effect2.willBeDiscovered) ? 0 : 1;
-            this.discoveries += effect1.currentDiscoveryValue + effect2.currentDiscoveryValue;
+            if(!effect1.discovered) {
+                effect1.willBeDiscovered = true;
+                effect1.currentDiscoveryValue = (effect2.discovered || effect2.willBeDiscovered) ? 1 : 2;
+            } else {
+                effect1.willBeDiscovered = false;
+                effect1.currentDiscoveryValue = 0;
+            }
+            this.discoveries += effect1.currentDiscoveryValue;
         }
     }
 
     DetermineAddedEffects = (effect1: Effect, effect2: Effect) => {
         if(effect1.name === effect2.name){
             //If there's a match, increase the effect value if neither ingredient is already adding to the mixture
-            effect1.currentAddedEffectsValue = (effect1.willHaveEffect || effect2.willHaveEffect) ? 0 : 1;
-            effect2.currentAddedEffectsValue = (effect1.willHaveEffect || effect2.willHaveEffect) ? 0 : 1;
+            if(!effect2.willHaveEffect) {
+                effect1.willHaveEffect = true;
+                effect1.currentAddedEffectsValue = 1;
+            } else {
+                effect1.willHaveEffect = false;
+                effect1.currentAddedEffectsValue = 0;
+            }
             this.addedEffects += effect1.currentAddedEffectsValue;
         }
     }
