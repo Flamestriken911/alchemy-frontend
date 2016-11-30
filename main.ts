@@ -1,22 +1,33 @@
 import express = require('express');
 import DataHandler = require('./Backend/Data/DataHandler');
-// import ConsoleInterface = require('./ConsoleInterface');
+import DataHelper = require('./Backend/Data/DataHelper');
 
-// var consoleInterface = new ConsoleInterface();
 var dataHandler = new DataHandler();
+var dataHelper = new DataHelper();
 var app = express();
 
-// consoleInterface.UserQuestion();
 app.get('/', function(req, res) {
     res.send('hello');
 }).get('/ingredients', function(req, res) {
     dataHandler.GetUserListOrDefault(null, (err, list) => {
         if(err){
-            //TODO: real error handling
-            console.log('There was an error retrieving data');
             res.sendStatus(500);
         } else {
             res.json(list);
+        }
+    })
+}).get('/ingredients/get-matches', function(req, res) {
+    dataHandler.GetUserListOrDefault(null, (err, list) => {
+        if(err){
+            res.sendStatus(500);
+        } else {
+            dataHelper.CheckMatchesInList(list,req.query.id,null,(err, list) => {
+                if(err){
+                    res.sendStatus(500);
+                } else {
+                    res.json(list);
+                }
+            })
         }
     })
 })
