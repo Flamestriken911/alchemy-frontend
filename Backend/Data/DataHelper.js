@@ -30,6 +30,12 @@ class DataHelper {
             return new Mixture(ingredients);
         };
     }
+    //Update an ingredient with an effect discovery
+    UpdateWithDiscovery(id, effectName, value, list) {
+        list.ingredients.find((ing) => ing.id === id)
+            .effects.find((effect) => effect.name === effectName)
+            .discovered = value;
+    }
 }
 module.exports = DataHelper;
 //# sourceMappingURL=DataHelper.js.map

@@ -52,13 +52,13 @@ class DataHandler {
         })
     }
 
-    WriteIngredientList = (list: IngredientList, callback) => {
+    WriteIngredientList = (list: IngredientList, callback: (str:string)=>void) => {
         console.log(`Current user: ${this.user}`);
         console.log(`Writing to file: ${this.filePath}`);
         var fileWriteSteam = fs.createWriteStream(this.filePath);
         fileWriteSteam.write(list.ToStorageString());
         fileWriteSteam.close();
-        callback('wrote to file');
+        callback('200:OK');
     }
 
     ParseIngredientString = (ingredientString: string): Ingredient => {
@@ -70,7 +70,7 @@ class DataHandler {
             var effectSplit = ingredientString_Split[i].split(':');
             var effectName = effectSplit[0];
             var effectIsDiscovered = effectSplit[1] === 'true';
-            effects[i-1] = new Effect(effectName, effectIsDiscovered);
+            effects.push(new Effect(effectName, effectIsDiscovered));
         }
         return new Ingredient(ingredientId, ingredientName, effects);
     };

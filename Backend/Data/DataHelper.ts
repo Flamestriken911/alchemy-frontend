@@ -27,6 +27,13 @@ class DataHelper {
         }
     }
 
+    //Update an ingredient with an effect discovery
+    UpdateWithDiscovery(id: number, effectName: string, value:boolean, list: IngredientList){
+        list.ingredients.find((ing) => ing.id === id)
+            .effects.find((effect) => effect.name === effectName)
+            .discovered = value;
+    }
+
     MakeMixture = (list: IngredientList, mixture: Mixture) => {
         mixture.MakeMixture();
         //Replace each ingredient in the list with its counterpart in the mixture

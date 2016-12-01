@@ -47,7 +47,7 @@ class DataHandler {
             var fileWriteSteam = fs.createWriteStream(this.filePath);
             fileWriteSteam.write(list.ToStorageString());
             fileWriteSteam.close();
-            callback('wrote to file');
+            callback('200:OK');
         };
         this.ParseIngredientString = (ingredientString) => {
             var ingredientString_Split = ingredientString.replace(/[^a-zA-Z0-9',: ]/g, '').split(',');
@@ -58,7 +58,7 @@ class DataHandler {
                 var effectSplit = ingredientString_Split[i].split(':');
                 var effectName = effectSplit[0];
                 var effectIsDiscovered = effectSplit[1] === 'true';
-                effects[i - 1] = new Effect(effectName, effectIsDiscovered);
+                effects.push(new Effect(effectName, effectIsDiscovered));
             }
             return new Ingredient(ingredientId, ingredientName, effects);
         };
