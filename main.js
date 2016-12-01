@@ -7,8 +7,8 @@ var dataHelper = new DataHelper();
 var app = express();
 app.get('/', function (req, res) {
     res.send('hello');
-}).get('/ingredients', function (req, res) {
-    dataHandler.GetUserListOrDefault(null, (err, list) => {
+}).get('/:user/ingredients', function (req, res) {
+    dataHandler.GetUserListOrDefault(req.params.user, (err, list) => {
         if (err) {
             res.sendStatus(500);
         }
@@ -16,8 +16,8 @@ app.get('/', function (req, res) {
             res.json(list);
         }
     });
-}).get('/ingredients/get-matches', function (req, res) {
-    dataHandler.GetUserListOrDefault(null, (err, list) => {
+}).get('/:user/ingredients/get-matches', function (req, res) {
+    dataHandler.GetUserListOrDefault(req.params.user, (err, list) => {
         if (err) {
             res.sendStatus(500);
         }
@@ -33,19 +33,15 @@ app.get('/', function (req, res) {
             });
         }
     });
-}).get('/ingredients/:id/:effect_name/:value', function (req, res) {
-    dataHandler.GetUserListOrDefault(null, (err, list) => {
+}).get('/:user/ingredients/:id/:effect_name/:value', function (req, res) {
+    dataHandler.GetUserListOrDefault(req.params.user, (err, list) => {
         if (err) {
             res.sendStatus(500);
         }
         else {
-            console.log(JSON.stringify(list));
             dataHelper.UpdateWithDiscovery(+req.params.id, req.params.effect_name, req.params.value === "true", list);
-            //TODO: remove lines below
-            console.log(JSON.stringify(list));
-            dataHandler.user = 'updatetest';
-            dataHandler.WriteIngredientList(list, (str) => console.log(str));
-            res.sendStatus(200);
+            dataHandler.WriteIngredientList(list, () => res.sendStatus(200));
+            ;
         }
     });
 });

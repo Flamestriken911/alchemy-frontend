@@ -47,7 +47,7 @@ class DataHandler {
             var fileWriteSteam = fs.createWriteStream(this.filePath);
             fileWriteSteam.write(list.ToStorageString());
             fileWriteSteam.close();
-            callback('200:OK');
+            callback();
         };
         this.ParseIngredientString = (ingredientString) => {
             var ingredientString_Split = ingredientString.replace(/[^a-zA-Z0-9',: ]/g, '').split(',');

@@ -52,13 +52,13 @@ class DataHandler {
         })
     }
 
-    WriteIngredientList = (list: IngredientList, callback: (str:string)=>void) => {
+    WriteIngredientList = (list: IngredientList, callback: ()=>void) => {
         console.log(`Current user: ${this.user}`);
         console.log(`Writing to file: ${this.filePath}`);
         var fileWriteSteam = fs.createWriteStream(this.filePath);
         fileWriteSteam.write(list.ToStorageString());
         fileWriteSteam.close();
-        callback('200:OK');
+        callback();
     }
 
     ParseIngredientString = (ingredientString: string): Ingredient => {
