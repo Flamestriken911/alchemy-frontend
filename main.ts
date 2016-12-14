@@ -31,6 +31,7 @@ app.get('/', function(req, res) {
         }
     })
 }).get('/:user/ingredients/:id/:effect_name/:value', function(req, res) {
+    //TODO: This should be a 'patch', not a 'get'
     dataHandler.GetUserListOrDefault(req.params.user, (err, list) => {
         if(err){
             res.sendStatus(500);
