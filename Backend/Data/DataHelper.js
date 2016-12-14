@@ -18,7 +18,8 @@ class DataHelper {
                 callback(null, list, mixture);
             }
         };
-        this.MakeMixture = (list, mixture) => {
+        this.MakeMixture = (list, ingredientIds) => {
+            var mixture = this.CreateMixture(list.ingredients.filter((ingredient) => ingredientIds.some((id) => id === ingredient.id)));
             mixture.MakeMixture();
             //Replace each ingredient in the list with its counterpart in the mixture
             mixture.ingredients.forEach((ingredient) => {

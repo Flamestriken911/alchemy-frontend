@@ -34,7 +34,8 @@ class DataHelper {
             .discovered = value;
     }
 
-    MakeMixture = (list: IngredientList, mixture: Mixture) => {
+    MakeMixture = (list: IngredientList, ingredientIds: number[]) => {
+        var mixture = this.CreateMixture(list.ingredients.filter((ingredient) => ingredientIds.some((id) => id === ingredient.id)));
         mixture.MakeMixture();
         //Replace each ingredient in the list with its counterpart in the mixture
         mixture.ingredients.forEach((ingredient) => {
